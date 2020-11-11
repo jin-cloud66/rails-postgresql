@@ -9,3 +9,5 @@ posgresql:
     upgrade: 
       configuration:
         version: '12'        
+mysql:
+  server: external
