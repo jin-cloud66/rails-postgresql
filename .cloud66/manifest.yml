@@ -1,3 +1,11 @@
 rails:
   configuration:
     ruby_version: "2.7.2"
+posgresql:
+  groups:
+    default: 
+      configuration:
+        version: '11'
+    upgrade: 
+      configuration:
+        version: '12'        
