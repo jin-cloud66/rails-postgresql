@@ -3,7 +3,6 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
-  username: <%= ENV['DATABASE_USERNAME'] || '' %>
   password: <%= ENV['DATABASE_PASSWORD'] || '' %>
 development:
   <<: *default
@@ -14,5 +13,4 @@ test:
 production:
   <<: *default
   database: final_file_production
-  username: final_file
   password: <%= ENV['DATABASE_PASSWORD'] %>
