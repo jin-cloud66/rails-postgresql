@@ -14,5 +14,5 @@ test:
 production:
   <<: *default
   database: final_file_production
-  username: **REDACTED**
+  username: final_file
   password: <%= ENV['DATABASE_PASSWORD'] %>
