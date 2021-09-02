@@ -18,8 +18,16 @@ test:
   database: example_test
 
 production:
-  <<: *default
-  database: <%= ENV['POSTGRESQL_DATABASE'] %>
-  username: <%= ENV['POSTGRESQL_USERNAME'] %>
-  password: <%= ENV['POSTGRESQL_PASSWORD'] %>
-  host: <%= ENV['POSTGRESQL_ADDRESS'] || ENV['POSTGRESQL_HOST'] %>
+  primary:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_PRIMARY_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_PRIMARY_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_PRIMARY_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_PRIMARY_ADDRESS'] || ENV['POSTGRESQL_PRIMARY_HOST'] %>
+  articles:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_ARTICLES_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_ARTICLES_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_ARTICLES_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_ARTICLES_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_HOST'] %>
+    migrations_paths: db/migrate/articles_migrate
