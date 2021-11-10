@@ -7,15 +7,40 @@ default: &default
   host: localhost
 
 development:
-  <<: *default
-  database: example_development
+  primary:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_PRIMARY_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_PRIMARY_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_PRIMARY_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_PRIMARY_ADDRESS'] || ENV['POSTGRESQL_PRIMARY_HOST'] %>
+  primary_replica:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_ADDRESS'] || ENV['POSTGRESQL_PRIMARY_REPLICA_HOST'] %>
+    replica: true
+  articles:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_ARTICLES_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_ARTICLES_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_ARTICLES_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_ARTICLES_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_HOST'] %>
+    migrations_paths: db/migrate/articles_migrate
+  articles_replica:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_REPLICA_HOST'] %>
+    replica: true
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: example_test
+# test:
+#   <<: *default
+#   database: example_test
 
 production:
   primary:
@@ -24,6 +49,13 @@ production:
     username: <%= ENV['POSTGRESQL_PRIMARY_USERNAME'] %>
     password: <%= ENV['POSTGRESQL_PRIMARY_PASSWORD'] %>
     host: <%= ENV['POSTGRESQL_PRIMARY_ADDRESS'] || ENV['POSTGRESQL_PRIMARY_HOST'] %>
+  primary_replica:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_PRIMARY_REPLICA_ADDRESS'] || ENV['POSTGRESQL_PRIMARY_REPLICA_HOST'] %>
+    replica: true
   articles:
     <<: *default
     database: <%= ENV['POSTGRESQL_ARTICLES_DATABASE'] %>
@@ -31,3 +63,10 @@ production:
     password: <%= ENV['POSTGRESQL_ARTICLES_PASSWORD'] %>
     host: <%= ENV['POSTGRESQL_ARTICLES_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_HOST'] %>
     migrations_paths: db/migrate/articles_migrate
+  articles_replica:
+    <<: *default
+    database: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_DATABASE'] %>
+    username: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_USERNAME'] %>
+    password: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_PASSWORD'] %>
+    host: <%= ENV['POSTGRESQL_ARTICLES_REPLICA_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_REPLICA_HOST'] %>
+    replica: true
