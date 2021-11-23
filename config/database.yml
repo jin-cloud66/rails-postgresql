@@ -31,3 +31,6 @@ production:
     password: <%= ENV['POSTGRESQL_ARTICLES_PASSWORD'] %>
     host: <%= ENV['POSTGRESQL_ARTICLES_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_HOST'] %>
     migrations_paths: db/migrate/articles_migrate
+  logs:
+    <<: *default
+    url: postgresql://test.url.com
