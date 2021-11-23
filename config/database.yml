@@ -32,5 +32,7 @@ production:
     host: <%= ENV['POSTGRESQL_ARTICLES_ADDRESS'] || ENV['POSTGRESQL_ARTICLES_HOST'] %>
     migrations_paths: db/migrate/articles_migrate
   logs:
-    <<: *default
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     url: postgresql://test.url.com
