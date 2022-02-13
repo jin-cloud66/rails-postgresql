@@ -1,3 +1,10 @@
 rails:
   configuration:
     ruby_version: "2.7.2"
+    health:
+      protocol: 'http'
+      host: 'localhost'
+      port: 80
+      endpoint: '/'
+      accept: ["200", "300-399"]
+      timeout: 30
